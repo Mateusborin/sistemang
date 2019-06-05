@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { FormsModule } from '@angular/forms';
+import { ProdutoComponent } from './produto/produto.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     ClienteComponent,
-    LoginComponent    
+    LoginComponent,
+    ProdutoComponent    
   ],
   providers: [AuthGuard, LoginService, AngularFireModule, AngularFireAuth],
   bootstrap: [AppComponent]
