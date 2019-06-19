@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { OnInit, Component } from '@angular/core';
-import { Cliente } from './cliente.model';
+import { teste } from './teste.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'
 
@@ -11,67 +11,55 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'cliente',
-    templateUrl: './cliente.component.html',
-    styleUrls: ['./cliente.component.css']
+    selector: 'teste',
+    templateUrl: './teste.component.html',
+    styleUrls: ['./teste.component.css']
 })
 
 @NgModule({
     imports: [FormsModule, CommonModule],
-    declarations: [ClienteComponent]
+    declarations: [TesteComponent]
 })
 
-export class ClienteComponent implements OnInit {
+export class TesteComponent implements OnInit {
 
-    cliente: Cliente;
-    clientesRef: AngularFireList<any>;
-    clientes: any[];
+    teste: teste;
+    testeRef: AngularFireList<any>;
+    
 
     constructor(private db: AngularFireDatabase) { }
 
     ngOnInit(): void {
-        this.cliente = new Cliente(null,null,null);
+        this.teste = new teste(null,null,null);
         this.listar();
     }
 
     salvar() {
-        if (this.cliente.key == null) {
-            this.db.list('clientes').push(this.cliente)
-                .then((result: any) => {
-                    console.log(result.key);
-                });            
-        } else {
-            this.db.list('clientes').update(this.cliente.key,this.cliente)
+        this.db.list('teste').push(this.teste)
             .then((result: any) => {
                 console.log(result.key);
-            });  
-        }
+            });            
     }
-    carregar(cliente:Cliente) {
-        this.cliente = new Cliente(cliente.key,
-            cliente.nome, cliente.dataNascimento);
-    }
-
     excluir(key:string) {
         if (confirm('Deseja realmente excluir?')){
-        this.db.list('clientes').remove(key)
+        this.db.list('teste').remove(key)
             .then((result: any) => {
                 console.log(result.key);
             });
-            this.cliente = new Cliente (null,null,null)    
+            this.teste = new teste (null,null,null)    
         }        
     }
 
     listar() {        
         this.getAll().subscribe(
-            clientes => this.clientes = clientes,
+            //teste => this.teste = teste,
             error => alert(error),
             () => console.log("terminou")
           );        
     }
 
     getAll() : Observable<any[]> {
-        return this.db.list('clientes')
+        return this.db.list('teste')
           .snapshotChanges()
           .pipe(
             map(changes => {

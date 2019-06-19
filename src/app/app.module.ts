@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
+import { TesteComponent } from './teste/teste.component';
 
 import { AngularFireAuth  } from '@angular/fire/auth';
 
@@ -21,9 +22,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule } from '@angular/forms';
 import { ProdutoComponent } from './produto/produto.component';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TesteComponent
   ],
   imports: [
     BrowserModule,

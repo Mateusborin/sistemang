@@ -1,13 +1,12 @@
-export class Cliente {
+export class teste {
 
-    constructor(key: string, nome: string, dataNascimento: any) {
+    constructor(key: Number, nome: String, dataNascimento: any) {
         this.key = key;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
     }
 
-    key: string;
-    nome: string;
+    key: Number;
+    nome: String;
     dataNascimento:any;
-
 }
