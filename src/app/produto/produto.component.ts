@@ -35,21 +35,23 @@ export class ProdutoComponent implements OnInit {
     }
 
     salvar() {
-        this.db.list('produtos').push(this.produto)
+        if (this.produto.key == null) {
+            this.db.list('produtos').push(this.produto)
+                .then((result: any) => {
+                    console.log(result.key);
+                });            
+        } else {
+            this.db.list('produtos').update(this.produto.key,this.produto)
             .then((result: any) => {
                 console.log(result.key);
-            });            
-    }
-    excluir(key:string) {
-        if (confirm('Deseja realmente excluir?')){
-        this.db.list('produtos').remove(key)
-            .then((result: any) => {
-                console.log(result.key);
-            });
-            this.produto = new Produto (null,null,null)    
-        }        
+            });  
+        }
     }
 
+    carregar(produto:Produto) {
+        this.produto = new Produto(produto.key,
+            produto.nome, produto.preco, produto.data, produto.descricao);
+    }
     listar() {        
         this.getAll().subscribe(
             produtos => this.produtos = produtos,
